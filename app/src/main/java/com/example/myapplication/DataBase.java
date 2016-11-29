@@ -53,7 +53,13 @@ public class DataBase extends SQLiteOpenHelper{
         db.insert(table_name,null,value);
         db.close();
     }
+    public User get_user(){
 
+        return null;
+    }
+    public void delete_user(){
+
+    }
     public ArrayList<User> get_users(){
         users.clear();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -64,9 +70,10 @@ public class DataBase extends SQLiteOpenHelper{
                 User contact = new User();
                 contact.setId(Integer.parseInt(cursor.getString(0)));
                 contact.setName(cursor.getString(1));
-                contact.setAddress(cursor.getString(4));
                 contact.setGender(cursor.getString(2));
                 contact.setEmail(cursor.getString(3));
+                contact.setAddress(cursor.getString(4));
+
                 // Adding contact to list
                 users.add(contact);
             } while (cursor.moveToNext());

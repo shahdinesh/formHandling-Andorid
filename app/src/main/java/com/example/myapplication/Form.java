@@ -32,7 +32,7 @@ public class Form extends AppCompatActivity {
             System.out.println("Error while add data..");
             System.out.println(e);
         }
-        Intent intend = new Intent(getApplicationContext(),MainActivity.class);
+        Intent intend = new Intent(Form.this,MainActivity.class);
         startActivity(intend);
     }
 
