@@ -1,14 +1,14 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     ArrayList<User> userList = new ArrayList<User>();
     ListView listUser;
     UserAdapter userAdapter;
@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
             String address = userListDb.get(i).getAddress();
             String email = userListDb.get(i).getEmail();
             String gender = userListDb.get(i).getGender();
-            //System.out.println("user: name: "+name+", gender: "+gender+", address: "+address+", email: "+email);
+            //System.out.println("user: "+id+"- name: "+name+", gender: "+gender+", address: "+address+", email: "+email);
             User user = new User();
             user.setId(id);
             user.setGender(gender);
             user.setAddress(address);
             user.setEmail(email);
-            user.setName(name);
+            user.setName(i+1+". "+name);
 
             userList.add(user);
         }

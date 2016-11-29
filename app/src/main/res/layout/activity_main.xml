@@ -10,8 +10,6 @@
         android:background="#4fe147"
         android:textColor="#0d000c"
         android:id="@+id/add_user"
-        android:clickable="false"
-        android:focusable="false"
         android:onClick="Form"
         android:layout_gravity="center_horizontal" />
 

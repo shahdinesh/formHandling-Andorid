@@ -80,17 +80,13 @@ public class UserAdapter extends ArrayAdapter{
                 adb.setMessage("Are you sure you want to delete ");
                 final int user_id = Integer.parseInt(v.getTag().toString());
                 adb.setNegativeButton("Cancel", null);
-                adb.setPositiveButton("Ok",
-                        new AlertDialog.OnClickListener() {
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // MyDataObject.remove(positionToRemove);
                                 DataBase dBHandler = new DataBase(activity.getApplicationContext());
-                                //dBHandler.Delete_Contact(user_id);
-                                //MainActivity.this.onResume();
+                                dBHandler.delete_user(user_id);
+                                
                             }
-
-
                         });
                 adb.show();
             }
@@ -100,13 +96,21 @@ public class UserAdapter extends ArrayAdapter{
 
     }
 
-    class UserHolder {
+    class UserHolder extends Activity{
         TextView name;
         TextView email;
         TextView address;
         TextView gender;
         Button edit;
         Button delete;
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            MainActivity main = new MainActivity();
+            main.getAllUser();
+
+        }
     }
 }
 
