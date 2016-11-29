@@ -76,7 +76,7 @@ public class DataBase extends SQLiteOpenHelper{
                 contact.setGender(cursor.getString(2));
                 contact.setEmail(cursor.getString(3));
                 contact.setAddress(cursor.getString(4));
-
+                
                 // Adding contact to list
                 users.add(contact);
             } while (cursor.moveToNext());

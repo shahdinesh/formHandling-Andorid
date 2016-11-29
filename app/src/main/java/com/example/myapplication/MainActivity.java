@@ -41,7 +41,6 @@ public class MainActivity extends Activity {
             String address = userListDb.get(i).getAddress();
             String email = userListDb.get(i).getEmail();
             String gender = userListDb.get(i).getGender();
-            //System.out.println("user: "+id+"- name: "+name+", gender: "+gender+", address: "+address+", email: "+email);
             User user = new User();
             user.setId(id);
             user.setGender(gender);

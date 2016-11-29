@@ -85,7 +85,7 @@ public class UserAdapter extends ArrayAdapter{
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 DataBase dBHandler = new DataBase(activity.getApplicationContext());
                                 dBHandler.delete_user(user_id);
-                                
+                                //to work here
                             }
                         });
                 adb.show();
