@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
                 android:text="Update Uata"
-                android:onClick="Main"/>
+                android:onClick="Add"/>
             <Button android:id="@+id/viewAll"
                 android:layout_width="230dp"
                 android:layout_gravity="center"

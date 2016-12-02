@@ -58,10 +58,21 @@ public class DataBase extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery("select * from " + table_name + " where id = " + id,null);
         if (cursor != null)
             cursor.moveToFirst();
-        User user = new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+        User user = new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1), cursor.getString(3), cursor.getString(4), cursor.getString(2));
         cursor.close();
         db.close();
         return user;
+    }
+    public void update_user(User user){
+        db = this.getWritableDatabase();
+        ContentValues value = new ContentValues();
+        value.put(KEY_NAME,user.getName());
+        value.put(KEY_ADDRESS,user.getAddress());
+        value.put(KEY_EMAIL,user.getEmail());
+        value.put(KEY_GENDER,user.getGender());
+
+        db.update(table_name,value,KEY_ID + " = ?", new String[]{String.valueOf(user.getId())});
+        db.close();
     }
     public void delete_user(int id){
         db = this.getWritableDatabase();
