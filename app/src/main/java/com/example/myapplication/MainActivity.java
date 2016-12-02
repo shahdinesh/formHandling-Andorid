@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -140,7 +141,6 @@ public class MainActivity extends Activity {
                     Intent update_user = new Intent(activity, Form.class);
                     update_user.putExtra("type", "update");
                     update_user.putExtra("USER_ID", v.getTag().toString());
-                    System.out.println(v.getTag().toString());
                     activity.startActivity(update_user);
                 }
             });
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             DataBase db = new DataBase(activity.getApplicationContext());
                             db.delete_user(user_id);
-                            db.close();
+                            Toast.makeText(MainActivity.this, "User " +user_id+" deleted..", Toast.LENGTH_LONG).show();
                             MainActivity.this.onResume();
                         }
                     });

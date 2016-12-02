@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class Form extends AppCompatActivity {
     EditText name,address,email;
@@ -33,7 +34,6 @@ public class Form extends AppCompatActivity {
             name.setText(user.getName());
             email.setText(user.getEmail());
             address.setText(user.getAddress());
-
             if (user.getGender().equalsIgnoreCase("female")){
                 female.setChecked(true);
                 male.setChecked(false);
@@ -49,13 +49,16 @@ public class Form extends AppCompatActivity {
 
     public void Add(View view){
         try {
-            System.out.println("here");
             if(type.equalsIgnoreCase("update")) {
-                System.out.println("update");
                 find();
                 update();
+
+                int userid = Integer.parseInt(getIntent().getStringExtra("USER_ID"));
+                Toast.makeText(Form.this, "User " +userid+" updated..", Toast.LENGTH_LONG).show();
+
             }else {
                 add();
+                Toast.makeText(Form.this, "New user added..", Toast.LENGTH_LONG).show();
             }
         }catch (Exception e){
             System.out.println("Error while add data..");
