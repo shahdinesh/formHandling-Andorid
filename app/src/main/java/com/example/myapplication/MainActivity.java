@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -74,6 +76,7 @@ public class MainActivity extends Activity {
 
     public void Form(View view) {
         Intent intend = new Intent(MainActivity.this,Form.class);
+        intend.putExtra("type","add");
         startActivity(intend);
     }
 
@@ -94,6 +97,8 @@ public class MainActivity extends Activity {
         int layoutResourceId;
         User user;
         ArrayList<User> data = new ArrayList<User>();
+        EditText name = (EditText) findViewById(R.id.reg_fullname), address = (EditText) findViewById(R.id.reg_address),
+                email = (EditText) findViewById(R.id.reg_email);
 
         public UserAdapter(Activity act, int layoutResourceId, ArrayList<User> data) {
             super(act, layoutResourceId, data);
@@ -110,7 +115,6 @@ public class MainActivity extends Activity {
 
             if (row == null) {
                 LayoutInflater inflater = LayoutInflater.from(activity);
-
                 row = inflater.inflate(layoutResourceId, parent, false);
                 holder = new UserHolder();
                 holder.name = (TextView) row.findViewById(R.id.nameText);
@@ -135,13 +139,11 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void onClick(View v) {
-                    Log.i("Edit Button Clicked", "**********");
-
                     Intent update_user = new Intent(activity, Form.class);
-                    update_user.putExtra("called", "update");
+                    update_user.putExtra("type", "update");
                     update_user.putExtra("USER_ID", v.getTag().toString());
+                    System.out.println(v.getTag().toString());
                     activity.startActivity(update_user);
-
                 }
             });
             holder.delete.setOnClickListener(new View.OnClickListener() {

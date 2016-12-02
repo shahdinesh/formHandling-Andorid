@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -14,15 +15,27 @@ public class Form extends AppCompatActivity {
     RadioButton gender;
     RadioGroup genderGroup;
     DataBase db = new DataBase(this);
+    Button addBtn, editBtn, viewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
+        find();
+
+        String type = getIntent().getStringExtra("type");
+        System.out.println(type);
+        if(type.equalsIgnoreCase("update")){
+            editBtn.setVisibility(View.VISIBLE);
+            addBtn.setVisibility(View.GONE);
+        }else{
+            addBtn.setVisibility(View.VISIBLE);
+            editBtn.setVisibility(View.GONE);
+        }
     }
 
-    public void Main(View view){
+    public void Add(View view){
         try {
             add();
             System.out.println("Data inserted");
@@ -36,8 +49,15 @@ public class Form extends AppCompatActivity {
         startActivity(intend);
     }
 
-    public void Form(View view) {
-        setContentView(R.layout.activity_form);
+    public void Main(View view) {
+        Intent intend = new Intent(Form.this,MainActivity.class);
+        startActivity(intend);
+    }
+
+    public void find() {
+        addBtn = (Button) findViewById(R.id.btnRegister);
+        editBtn = (Button) findViewById(R.id.btnUpdate);
+        viewBtn = (Button) findViewById(R.id.viewAll);
     }
 
     public void add(){

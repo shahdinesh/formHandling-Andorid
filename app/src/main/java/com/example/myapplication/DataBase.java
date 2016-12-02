@@ -23,7 +23,7 @@ public class DataBase extends SQLiteOpenHelper{
     private static final String KEY_ADDRESS = "address";
     private static final String KEY_GENDER = "gender";
     private ArrayList<User> users = new ArrayList<User>();
-
+    SQLiteDatabase db;
 
     public DataBase(Context context) {
         super(context, name, null, version);
@@ -43,7 +43,7 @@ public class DataBase extends SQLiteOpenHelper{
     }
 
     public void add_user(User user){
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(KEY_NAME,user.getName());
         value.put(KEY_ADDRESS,user.getAddress());
@@ -53,19 +53,25 @@ public class DataBase extends SQLiteOpenHelper{
         db.insert(table_name,null,value);
         db.close();
     }
-    public User get_user(){
-
-        return null;
+    public User get_user(int id){
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + table_name + " where id = " + id,null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        User user = new User(Integer.parseInt(cursor.getString(0)),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+        cursor.close();
+        db.close();
+        return user;
     }
     public void delete_user(int id){
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         db.delete(table_name, KEY_ID + " = ?", new String[] { String.valueOf(id) });
         db.close();
     }
 
     public ArrayList<User> get_users(){
         users.clear();
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + table_name,null);
 
         if (cursor.moveToFirst()) {
